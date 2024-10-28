@@ -26,6 +26,9 @@
 		"test": "jest",
 		"test:watch": "jest --watch"
 	},
+	"build": {
+		"publish": "never"
+	},
 	"packageManager": "yarn@4.2.2",
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
