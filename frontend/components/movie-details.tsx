@@ -78,7 +78,10 @@ export const MovieDetails = ({ id }) => {
 			<MovieDetailSection label="Genres">
 				<span className="flex flex-wrap gap-1 text-sm">
 					{movie?.genres.map((genre) => (
-						<span className="px-2.5 py-1 rounded-full bg-neutral-800">
+						<span
+							key={genre.id}
+							className="px-2.5 py-1 rounded-full bg-neutral-800"
+						>
 							{genre.name}
 						</span>
 					))}

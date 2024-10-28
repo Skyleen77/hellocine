@@ -212,7 +212,7 @@ const BrowsePage = () => {
 						</SelectTrigger>
 						<SelectContent>
 							{Array.from({ length: 50 }, (_, i) => (
-								<SelectItem value={(2024 - i).toString()}>
+								<SelectItem key={i} value={(2024 - i).toString()}>
 									{2024 - i}
 								</SelectItem>
 							))}
@@ -225,7 +225,10 @@ const BrowsePage = () => {
 						</SelectTrigger>
 						<SelectContent>
 							{genres?.map((genre) => (
-								<SelectItem value={genre?.id?.toString()}>
+								<SelectItem
+									key={genre?.id?.toString()}
+									value={genre?.id?.toString()}
+								>
 									{genre?.name}
 								</SelectItem>
 							))}
@@ -238,7 +241,10 @@ const BrowsePage = () => {
 						</SelectTrigger>
 						<SelectContent>
 							{languages?.map((language) => (
-								<SelectItem value={language?.iso_639_1}>
+								<SelectItem
+									key={language?.iso_639_1}
+									value={language?.iso_639_1}
+								>
 									{language?.english_name}
 								</SelectItem>
 							))}
@@ -250,7 +256,7 @@ const BrowsePage = () => {
 			<div className="flex flex-col gap-5 mt-5 sm:grid sm:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3">
 				{data?.pages.flatMap((page) =>
 					page.results.map((movie: Movie) => (
-						<Movie movie={movie}>
+						<Movie key={movie.id} movie={movie}>
 							<MoviePreview movie={movie} />
 						</Movie>
 					)),

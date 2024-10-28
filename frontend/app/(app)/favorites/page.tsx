@@ -54,7 +54,7 @@ const FavoritesPage = () => {
 						m.title.toLowerCase().includes(searchQuery.trim().toLowerCase()),
 					)
 					?.map((movie: Movie) => (
-						<Movie movie={movie}>
+						<Movie key={movie.id} movie={movie}>
 							<MoviePreview movie={movie} />
 						</Movie>
 					))}
