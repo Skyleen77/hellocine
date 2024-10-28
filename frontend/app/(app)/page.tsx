@@ -31,15 +31,15 @@ const BrowsePage = () => {
 	const { searchQuery } = useSearch();
 
 	const [randomMovie, setRandomMovie] = useState<Movie | null>(null);
-	const [selectedLanguage, setSelectedLanguage] = useState<string>(() => {
-		return localStorage.getItem("selectedLanguage") || "";
-	});
-	const [selectedGenre, setSelectedGenre] = useState<string>(() => {
-		return localStorage.getItem("selectedGenre") || "";
-	});
-	const [selectedYear, setSelectedYear] = useState<string>(() => {
-		return localStorage.getItem("selectedYear") || "";
-	});
+	const [selectedLanguage, setSelectedLanguage] = useState<string>("");
+	const [selectedGenre, setSelectedGenre] = useState<string>("");
+	const [selectedYear, setSelectedYear] = useState<string>("");
+
+	useEffect(() => {
+		setSelectedLanguage(localStorage.getItem("selectedLanguage") || "");
+		setSelectedGenre(localStorage.getItem("selectedGenre") || "");
+		setSelectedYear(localStorage.getItem("selectedYear") || "");
+	}, []);
 
 	const [debouncedSearchQuery, setDebouncedSearchQuery] =
 		useState<string>(searchQuery);
