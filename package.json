@@ -27,7 +27,7 @@
 		"test:watch": "jest --watch"
 	},
 	"build": {
-		"publish": "never"
+		"publish": null
 	},
 	"packageManager": "yarn@4.2.2",
 	"dependencies": {
