@@ -24,6 +24,7 @@ const ProfilePage = () => {
 
 	const { user, update } = useUser();
 
+	// Initialize the form with validation schema and default values
 	const form = useForm<z.infer<typeof settingsSchema>>({
 		resolver: zodResolver(settingsSchema),
 		defaultValues: {
@@ -35,17 +36,20 @@ const ProfilePage = () => {
 		},
 	});
 
+	// Set initial form values based on user data
 	useEffect(() => {
 		if (!user) return;
 		form.setValue("username", user.username);
 		form.setValue("email", user.email);
 	}, [user]);
 
+	// Handle form submission
 	function onSubmit(values: z.infer<typeof settingsSchema>) {
 		setError(null);
 
 		const { email, username, oldPassword, password } = values;
 
+		// Check if user exists in local storage
 		const existingUser = localStorage.getItem(email);
 
 		if (!existingUser) {
@@ -53,6 +57,7 @@ const ProfilePage = () => {
 			return;
 		}
 
+		// Verify current password
 		let newPassword = user.password;
 
 		if (oldPassword !== user.password) {
@@ -60,20 +65,24 @@ const ProfilePage = () => {
 			return;
 		}
 
+		// Update password if a new one is provided
 		if (password) {
 			newPassword = password;
 		}
 
+		// Update user details
 		update({
 			email,
 			username,
 			password: newPassword,
 		});
 
+		// Reset password fields
 		form.setValue("oldPassword", "");
 		form.setValue("password", "");
 		form.setValue("confirmPassword", "");
 
+		// Show success message
 		setSuccess("Profile updated successfully");
 		setTimeout(() => setSuccess(null), 5000);
 	}

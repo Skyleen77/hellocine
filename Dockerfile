@@ -1,21 +1,20 @@
-# Utiliser l'image officielle de Node.js
-FROM node:18
+# Use the official Node.js image
+FROM node:20
 
-# Définir le répertoire de travail
-WORKDIR /app
+# Enable Corepack to manage Yarn 4
+RUN corepack enable && corepack prepare yarn@4.2.2 --activate
 
-# Copier les fichiers de l'application et installer les dépendances
-COPY package*.json ./
-RUN yarn
+# Set the working directory
+WORKDIR /frontend/app
 
-# Copier le reste des fichiers de l'application
+# Copy all project files
 COPY . .
 
-# Construire l'application Next.js
-RUN yarn build
+# Install dependencies
+RUN yarn install
 
-# Exposer le port par défaut de Next.js
+# Expose the default Next.js port
 EXPOSE 3000
 
-# Commande de démarrage
+# Start command
 CMD ["yarn", "start"]
